@@ -35,4 +35,9 @@ setup(
     platforms='any',
     packages=find_packages(),
     use_2to3=True,
+    entry_points={
+        'pybtex.backend': [
+            'docutils = pybtex_docutils:Backend',
+        ]
+    },
 )
