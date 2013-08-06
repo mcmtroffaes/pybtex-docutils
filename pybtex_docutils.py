@@ -1,4 +1,4 @@
-"""Doctree backend for pybtex."""
+"""Docutils backend for pybtex."""
 
 import docutils.nodes
 
@@ -6,7 +6,7 @@ from pybtex.backends import BaseBackend
 import pybtex.richtext
 
 class Backend(BaseBackend):
-    name = 'doctree'
+    name = 'docutils'
 
     symbols = {
         'ndash': docutils.nodes.inline(u'\u2013', u'\u2013'),
