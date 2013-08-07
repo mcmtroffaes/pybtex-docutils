@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import setup
 import codecs
 
 
@@ -33,10 +33,10 @@ setup(
         'Topic :: Text Processing :: Markup :: XML'
     ],
     platforms='any',
-    packages=find_packages(),
+    py_modules=['pybtex_docutils'],
     use_2to3=True,
     entry_points={
-        'pybtex.backend': [
+        'pybtex.backends': [
             'docutils = pybtex_docutils:Backend',
         ]
     },
