@@ -8,6 +8,7 @@ branches:
   only:
     - develop
 install:
+  - "pip install coveralls --use-mirrors"
   - "pip install -e bzr+lp:pybtex#egg=pybtex" # needs trunk for now
   - "pip install . --use-mirrors"
 before_script:
@@ -15,4 +16,6 @@ before_script:
   - "if [[ $TRAVIS_PYTHON_VERSION == '3.3' ]]; then 2to3 -w -n test; fi"
 script:
   - "cd test"
-  - "nosetests"
+  - "coverage run --source=pybtex_docutils `type -p nosetests`"
+after_success:
+  - "coveralls"
