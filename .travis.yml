@@ -8,6 +8,7 @@ branches:
   only:
     - develop
 install:
+  - "pip install -e bzr+lp:pybtex#egg=pybtex" # needs trunk for now
   - "pip install . --use-mirrors"
 before_script:
   - "if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then 2to3 -w -n test; fi"
