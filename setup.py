@@ -9,6 +9,7 @@ def readfile(filename):
         return stream.read().split("\n")
 
 doclines = readfile("README.rst")
+requires = readfile("requirements.txt")
 version = readfile("VERSION")[0].strip()
 
 setup(
@@ -17,7 +18,7 @@ setup(
     url='https://github.com/mcmtroffaes/pybtex-docutils',
     download_url='http://pypi.python.org/pypi/pybtex-docutils',
     license='MIT',
-    author="Matthias C. M. Troffaes",
+    author='Matthias C. M. Troffaes',
     author_email='matthias.troffaes@gmail.com',
     description=doclines[0],
     long_description="\n".join(doclines[2:]),
@@ -34,6 +35,7 @@ setup(
     ],
     platforms='any',
     py_modules=['pybtex_docutils'],
+    install_requires=requires,
     use_2to3=True,
     entry_points={
         'pybtex.backends': [
