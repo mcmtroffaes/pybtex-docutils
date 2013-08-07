@@ -1,4 +1,8 @@
-"""Docutils backend for pybtex."""
+"""
+.. autoclass:: Backend
+   :show-inheritance:
+   :members: citation, citation_reference
+"""
 
 import docutils.nodes
 
