@@ -5,6 +5,7 @@ import docutils.nodes
 from pybtex.backends import BaseBackend
 import pybtex.richtext
 
+
 class Backend(BaseBackend):
     name = 'docutils'
 
@@ -14,7 +15,7 @@ class Backend(BaseBackend):
         'nbsp': docutils.nodes.inline(u'\u00a0', u'\u00a0')
     }
     tags = {
-         'emph': docutils.nodes.emphasis,
+        'emph': docutils.nodes.emphasis,
     }
 
     def format_text(self, text):
@@ -33,7 +34,7 @@ class Backend(BaseBackend):
     def format_href(self, url, text):
         if isinstance(url, basestring):
             refuri = url
-        else: # isinstance(url, pybtex.richtext.Text)
+        else:  # isinstance(url, pybtex.richtext.Text)
             refuri = url.plaintext()
         node = docutils.nodes.reference(refuri=refuri)
         node += text
