@@ -2,3 +2,7 @@
 ---------------------
 
 * Copied the backend from pybtex.
+
+* Initial documentation.
+
+* Initial tests and travis.ci integration.
