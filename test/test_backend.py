@@ -50,6 +50,9 @@ def test_render_sequence():
 
 class TestCitation(TestCase):
 
+    # enable long diffs
+    maxDiff = None
+
     def setUp(self):
         data = pybtex.database.BibliographyData({
             'hongquin1997': pybtex.database.Entry(
