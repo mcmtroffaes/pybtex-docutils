@@ -1,10 +1,11 @@
 """
 .. autoclass:: Backend
    :show-inheritance:
-   :members: citation, citation_reference
+   :members: paragraph, citation, citation_reference
 """
 
 import docutils.nodes
+import itertools
 
 from pybtex.backends import BaseBackend
 import pybtex.richtext
@@ -14,49 +15,50 @@ class Backend(BaseBackend):
     name = 'docutils'
 
     symbols = {
-        'ndash': docutils.nodes.inline(u'\u2013', u'\u2013'),
-        'newblock': docutils.nodes.inline(u' ', u' '),
-        'nbsp': docutils.nodes.inline(u'\u00a0', u'\u00a0')
+        'ndash': [docutils.nodes.Text(u'\u2013', u'\u2013')],
+        'newblock': [docutils.nodes.Text(u' ', u' ')],
+        'nbsp': [docutils.nodes.Text(u'\u00a0', u'\u00a0')],
     }
     tags = {
         'emph': docutils.nodes.emphasis,
     }
+    RenderType = list
 
+    # for compatibility only
     def format_text(self, text):
-        return docutils.nodes.inline(text, text)
+        return self.format_str(text)
+
+    def format_str(self, str_):
+        assert isinstance(str_, basestring)
+        return [docutils.nodes.Text(str_, str_)]
 
     def format_tag(self, tag_name, text):
+        assert isinstance(tag_name, basestring)
+        assert isinstance(text, self.RenderType)
         tag = self.tags[tag_name]
-        if isinstance(text, basestring):
-            return tag(text, text)
-        else:
-            # must be a docutils node
-            node = tag('', '')
-            node.children.append(text)
-            return node
+        node = tag('', '', *text)
+        return [node]
 
     def format_href(self, url, text):
-        if isinstance(url, basestring):
-            refuri = url
-        else:  # isinstance(url, pybtex.richtext.Text)
-            refuri = url.plaintext()
-        node = docutils.nodes.reference(refuri=refuri)
-        node += text
-        return node
+        assert isinstance(url, basestring)
+        assert isinstance(text, self.RenderType)
+        node = docutils.nodes.reference('', '', *text, refuri=url)
+        return [node]
 
     def write_entry(self, key, label, text):
         raise NotImplementedError("use Backend.citation() instead")
 
-    def render_sequence(self, text):
+    def render_sequence(self, rendered_list):
         """Return backend-dependent representation of sequence *text*
         of rendered Text objects.
         """
-        if len(text) != 1:
-            node = docutils.nodes.inline('', '')
-            node += text
-            return node
-        else:
-            return text[0]
+        return list(itertools.chain(*rendered_list))
+
+    def paragraph(self, entry):
+        """Return a docutils.nodes.paragraph
+        containing the rendered text for *entry* (without label).
+        """
+        return docutils.nodes.paragraph('', '', *entry.text.render(self))
 
     def citation(self, entry, document, use_key_as_label=True):
         """Return citation node, with key as name, label as first
@@ -74,7 +76,7 @@ class Backend(BaseBackend):
         citation = docutils.nodes.citation()
         citation['names'].append(name)
         citation += docutils.nodes.label('', label)
-        citation += text
+        citation += self.paragraph(entry)
         document.note_citation(citation)
         document.note_explicit_target(citation, citation)
         return citation
