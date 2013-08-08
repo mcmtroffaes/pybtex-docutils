@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import docutils.nodes
 import docutils.utils
 import nose.tools
@@ -50,9 +52,6 @@ def test_render_sequence():
 
 class TestCitation(TestCase):
 
-    # enable long diffs
-    maxDiff = None
-
     def setUp(self):
         data = pybtex.database.BibliographyData({
             'hongquin1997': pybtex.database.Entry(
@@ -78,16 +77,16 @@ class TestCitation(TestCase):
     def test_citation(self):
         node = self.backend.citation(self.entry, self.document)
         nose.tools.assert_equal(
-            str(node),
-            '<citation ids="hongquin1997" names="hongquin1997">'
-            '<label>hongquin1997</label>'
-            '<paragraph>'
-            'Hongquin Liu and Eli Ruckenstein. '
-            'Predicting the diffusion coefficient in supercritical fluids. '
-            '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
-            '36:888\\u2013895, 1997.'
-            '</paragraph>'
-            '</citation>')
+            unicode(node),
+            u'<citation ids="hongquin1997" names="hongquin1997">'
+            u'<label>hongquin1997</label>'
+            u'<paragraph>'
+            u'Hongquin Liu and Eli Ruckenstein. '
+            u'Predicting the diffusion coefficient in supercritical fluids. '
+            u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+            u'36:888–895, 1997.'
+            u'</paragraph>'
+            u'</citation>')
 
     def test_citation_reference(self):
         node = self.backend.citation_reference(self.entry, self.document)
@@ -101,16 +100,16 @@ class TestCitation(TestCase):
         node = self.backend.citation(
             self.entry, self.document, use_key_as_label=False)
         nose.tools.assert_equal(
-            str(node),
-            '<citation ids="hongquin1997" names="hongquin1997">'
-            '<label>1</label>'
-            '<paragraph>'
-            'Hongquin Liu and Eli Ruckenstein. '
-            'Predicting the diffusion coefficient in supercritical fluids. '
-            '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
-            '36:888\\u2013895, 1997.'
-            '</paragraph>'
-            '</citation>')
+            unicode(node),
+            u'<citation ids="hongquin1997" names="hongquin1997">'
+            u'<label>1</label>'
+            u'<paragraph>'
+            u'Hongquin Liu and Eli Ruckenstein. '
+            u'Predicting the diffusion coefficient in supercritical fluids. '
+            u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+            u'36:888–895, 1997.'
+            u'</paragraph>'
+            u'</citation>')
 
     def test_citation_reference_use_label(self):
         node = self.backend.citation_reference(
