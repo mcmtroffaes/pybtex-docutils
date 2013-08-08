@@ -5,6 +5,7 @@
 """
 
 import docutils.nodes
+import itertools
 
 from pybtex.backends import BaseBackend
 import pybtex.richtext
@@ -21,7 +22,7 @@ class Backend(BaseBackend):
     tags = {
         'emph': docutils.nodes.emphasis,
     }
-    RenderType = docutils.nodes.Node
+    RenderType = list
 
     # for compatibility only
     def format_text(self, text):
@@ -29,34 +30,29 @@ class Backend(BaseBackend):
 
     def format_str(self, str_):
         assert isinstance(str_, basestring)
-        return docutils.nodes.Text(str_, str_)
+        return [docutils.nodes.Text(str_, str_)]
 
     def format_tag(self, tag_name, text):
         assert isinstance(tag_name, basestring)
         assert isinstance(text, self.RenderType)
         tag = self.tags[tag_name]
-        node = tag('', '', text)
-        return node
+        node = tag('', '', *text)
+        return [node]
 
     def format_href(self, url, text):
         assert isinstance(url, basestring)
         assert isinstance(text, self.RenderType)
-        node = docutils.nodes.reference(refuri=url)
-        node += text
-        return node
+        node = docutils.nodes.reference('', '', *text, refuri=url)
+        return [node]
 
     def write_entry(self, key, label, text):
         raise NotImplementedError("use Backend.citation() instead")
 
-    def render_sequence(self, text):
+    def render_sequence(self, rendered_list):
         """Return backend-dependent representation of sequence *text*
         of rendered Text objects.
         """
-        if len(text) != 1:
-            node = docutils.nodes.inline('', '', *text)
-            return node
-        else:
-            return text[0]
+        return list(itertools.chain(*rendered_list))
 
     def citation(self, entry, document, use_key_as_label=True):
         """Return citation node, with key as name, label as first
