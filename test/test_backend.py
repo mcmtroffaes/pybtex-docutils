@@ -102,3 +102,7 @@ class TestCitation(TestCase):
         del self.entry
         del self.document
 
+
+@nose.tools.raises(NotImplementedError)
+def test_write_entry():
+    Backend().write_entry(None, None, None)
