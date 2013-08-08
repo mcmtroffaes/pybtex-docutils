@@ -6,7 +6,6 @@ Minimal Example
 
 .. code-block:: python
 
-    import docutils.utils
     import StringIO
     import pybtex.database.input.bibtex
     import pybtex.plugin
