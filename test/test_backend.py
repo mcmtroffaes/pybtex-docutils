@@ -19,7 +19,7 @@ def render_str(richtext):
 def test_text():
     nose.tools.assert_equal(
         Backend().format_text('hi'), Backend().format_str('hi'))
-    
+
 
 def test_tag():
     tag = Tag('emph', 'hello')
@@ -48,6 +48,7 @@ def test_href_text():
         '<reference refuri="http://www.example.com">'
         'hyperlinked text'
         '</reference>')
+
 
 def test_render_sequence():
     text = Text('hello ', Tag('emph', 'world'))
