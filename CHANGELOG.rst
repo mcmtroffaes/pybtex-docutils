@@ -14,8 +14,6 @@
 
 * Generated citation nodes now contain text inside a paragraph.
 
-* Optimized
-
 0.1.0 (7 August 2013)
 ---------------------
 
