@@ -49,20 +49,19 @@ class Backend(BaseBackend):
         raise NotImplementedError("use Backend.citation() instead")
 
     def render_sequence(self, rendered_list):
-        """Return backend-dependent representation of sequence *text*
-        of rendered Text objects.
-        """
         return list(itertools.chain(*rendered_list))
 
     def paragraph(self, entry):
         """Return a docutils.nodes.paragraph
         containing the rendered text for *entry* (without label).
+
+        .. versionadded:: 0.2.0
         """
         return docutils.nodes.paragraph('', '', *entry.text.render(self))
 
     def citation(self, entry, document, use_key_as_label=True):
         """Return citation node, with key as name, label as first
-        child, and rendered text as second child. The citation is
+        child, and paragraph with entry text as second child. The citation is
         expected to be inserted into *document* prior to any docutils
         transforms.
         """
