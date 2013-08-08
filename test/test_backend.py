@@ -78,10 +78,12 @@ class TestCitation(TestCase):
             str(node),
             '<citation ids="hongquin1997" names="hongquin1997">'
             '<label>hongquin1997</label>'
+            '<paragraph>'
             'Hongquin Liu and Eli Ruckenstein. '
             'Predicting the diffusion coefficient in supercritical fluids. '
             '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
             '36:888\\u2013895, 1997.'
+            '</paragraph>'
             '</citation>')
 
     def test_citation_reference(self):

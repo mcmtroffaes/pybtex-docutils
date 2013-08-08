@@ -54,6 +54,12 @@ class Backend(BaseBackend):
         """
         return list(itertools.chain(*rendered_list))
 
+    def paragraph(self, entry):
+        """Return a docutils.nodes.paragraph
+        containing the rendered text for *entry* (without label).
+        """
+        return docutils.nodes.paragraph('', '', *entry.text.render(self))
+
     def citation(self, entry, document, use_key_as_label=True):
         """Return citation node, with key as name, label as first
         child, and rendered text as second child. The citation is
@@ -70,7 +76,7 @@ class Backend(BaseBackend):
         citation = docutils.nodes.citation()
         citation['names'].append(name)
         citation += docutils.nodes.label('', label)
-        citation += text
+        citation += self.paragraph(entry)
         document.note_citation(citation)
         document.note_explicit_target(citation, citation)
         return citation
