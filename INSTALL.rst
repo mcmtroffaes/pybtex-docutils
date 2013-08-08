@@ -23,19 +23,14 @@ Minimal Example
       edition =   {2nd},
     }
     """))
-    document = docutils.utils.new_document('example.rst')
     for entry in style.format_entries(data.entries.itervalues()):
-        document += backend.paragraph(entry)
-
-    print(document)
+        print(backend.paragraph(entry))
 
 would produce:
 
 .. code-block:: xml
 
-   <document source="example.rst">
-     <paragraph>
-       D. Lindley. <emphasis>Making Decisions</emphasis>.
-       Wiley, 2nd edition, 1985.
-     </paragraph>
-   </document>
+   <paragraph>
+     D. Lindley. <emphasis>Making Decisions</emphasis>.
+     Wiley, 2nd edition, 1985.
+   </paragraph>

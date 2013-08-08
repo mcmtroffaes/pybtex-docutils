@@ -3,13 +3,14 @@
 import nose.tools
 
 expected_result = (
-    u'<document source="example.rst">'
     u'<paragraph>D.\xa0Lindley. <emphasis>Making Decisions</emphasis>. '
-    u'Wiley, 2nd edition, 1985.</paragraph></document>'
+    u'Wiley, 2nd edition, 1985.</paragraph>'
     )
 
 def test_install_example():
+    result = []
 
+    ### example begin ###
     import docutils.utils
     import StringIO
     import pybtex.database.input.bibtex
@@ -27,11 +28,10 @@ def test_install_example():
       edition =   {2nd},
     }
     """))
-    document = docutils.utils.new_document('example.rst')
     for entry in style.format_entries(data.entries.itervalues()):
-        document += backend.paragraph(entry)
+        print(backend.paragraph(entry))
+    ### example end ###
+        result.append(backend.paragraph(entry))
 
-    print(document)
-
-
-    nose.tools.assert_equal(unicode(document), expected_result)
+    nose.tools.assert_equal(len(result), 1)
+    nose.tools.assert_equal(unicode(result[0]), expected_result)
