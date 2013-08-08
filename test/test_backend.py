@@ -8,16 +8,14 @@ def test_tag():
     tag = Tag('emph', 'hello')
     nose.tools.assert_equal(
         str(tag.render(Backend())),
-        '<emphasis><inline>hello</inline></emphasis>')
+        '<emphasis>hello</emphasis>')
 
 
 def test_tag_text():
     tag = Tag('emph', Text('hello', ' world'))
     nose.tools.assert_equal(
         str(tag.render(Backend())),
-        '<emphasis><inline>'
-        '<inline>hello</inline><inline> world</inline>'
-        '</inline></emphasis>')
+        '<emphasis>hello world</emphasis>')
 
 
 def test_href():
@@ -25,7 +23,7 @@ def test_href():
     nose.tools.assert_equal(
         str(href.render(Backend())),
         '<reference refuri="http://www.example.com">'
-        '<inline>hyperlinked text</inline>'
+        'hyperlinked text'
         '</reference>')
 
 
@@ -34,7 +32,11 @@ def test_href_text():
     nose.tools.assert_equal(
         str(href.render(Backend())),
         '<reference refuri="http://www.example.com">'
-        '<inline>'
-        '<inline>hyperlinked</inline><inline> text</inline>'
-        '</inline>'
+        'hyperlinked text'
         '</reference>')
+
+def test_render_sequence():
+    text = Text('hello ', Tag('emph', 'world'))
+    nose.tools.assert_equal(
+        str(text.render(Backend())),
+        '<inline>hello <emphasis>world</emphasis></inline>')

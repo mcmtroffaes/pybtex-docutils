@@ -21,26 +21,27 @@ class Backend(BaseBackend):
     tags = {
         'emph': docutils.nodes.emphasis,
     }
+    RenderType = docutils.nodes.Node
 
+    # for compatibility only
     def format_text(self, text):
-        return docutils.nodes.inline(text, text)
+        return self.format_str(text)
+
+    def format_str(self, str_):
+        assert isinstance(str_, basestring)
+        return docutils.nodes.Text(str_, str_)
 
     def format_tag(self, tag_name, text):
+        assert isinstance(tag_name, basestring)
+        assert isinstance(text, self.RenderType)
         tag = self.tags[tag_name]
-        if isinstance(text, basestring):
-            return tag(text, text)
-        else:
-            # must be a docutils node
-            node = tag('', '')
-            node.children.append(text)
-            return node
+        node = tag('', '', text)
+        return node
 
     def format_href(self, url, text):
-        if isinstance(url, basestring):
-            refuri = url
-        else:  # isinstance(url, pybtex.richtext.Text)
-            refuri = url.plaintext()
-        node = docutils.nodes.reference(refuri=refuri)
+        assert isinstance(url, basestring)
+        assert isinstance(text, self.RenderType)
+        node = docutils.nodes.reference(refuri=url)
         node += text
         return node
 
@@ -52,8 +53,7 @@ class Backend(BaseBackend):
         of rendered Text objects.
         """
         if len(text) != 1:
-            node = docutils.nodes.inline('', '')
-            node += text
+            node = docutils.nodes.inline('', '', *text)
             return node
         else:
             return text[0]
