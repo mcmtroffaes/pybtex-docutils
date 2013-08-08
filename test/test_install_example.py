@@ -11,7 +11,6 @@ def test_install_example():
     result = []
 
     ### example begin ###
-    import docutils.utils
     import StringIO
     import pybtex.database.input.bibtex
     import pybtex.plugin
