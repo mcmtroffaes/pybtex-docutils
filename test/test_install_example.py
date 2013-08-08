@@ -1,10 +1,14 @@
-Install the module with ``pip install pybtex-docutils``, or from
-source using ``python setup.py install``.
+# -*- coding: utf-8 -*-
 
-Minimal Example
----------------
+import nose.tools
 
-.. code-block:: python
+expected_result = (
+    u'<document source="example.rst">'
+    u'<paragraph>D.\xa0Lindley. <emphasis>Making Decisions</emphasis>. '
+    u'Wiley, 2nd edition, 1985.</paragraph></document>'
+    )
+
+def test_install_example():
 
     import docutils.utils
     import StringIO
@@ -29,13 +33,5 @@ Minimal Example
 
     print(document)
 
-would produce:
 
-.. code-block:: xml
-
-   <document source="example.rst">
-     <paragraph>
-       D. Lindley. <emphasis>Making Decisions</emphasis>.
-       Wiley, 2nd edition, 1985.
-     </paragraph>
-   </document>
+    nose.tools.assert_equal(unicode(document), expected_result)
