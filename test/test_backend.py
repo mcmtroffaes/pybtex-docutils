@@ -15,6 +15,12 @@ def render_str(richtext):
     return "".join(str(node) for node in richtext.render(Backend()))
 
 
+# may remove this test when new pybtex is out
+def test_text():
+    nose.tools.assert_equal(
+        Backend().format_text('hi'), Backend().format_str('hi'))
+    
+
 def test_tag():
     tag = Tag('emph', 'hello')
     nose.tools.assert_equal(render_str(tag), '<emphasis>hello</emphasis>')
