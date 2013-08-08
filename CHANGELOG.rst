@@ -1,13 +1,15 @@
-0.2.0 (in development)
-----------------------
+0.2.0 (8 August 2013)
+---------------------
 
-* Backward incompatible API change: the backend now renders into a
+* **BACKWARD INCOMPATIBLE**
+  The backend now renders into a
   list of docutils nodes instead of a single docutils node.
 
-* New :meth:`Backend.paragraph` method to render an entry into a single
+* New :meth:`~pybtex_docutils.Backend.paragraph` method
+  to render an entry into a single
   docutils paragraph.
 
-* The <inline> wrapper nodes are no more, leading to much simpler
+* The ``<inline>`` wrapper nodes are no more, leading to much simpler
   generated code.
 
 * Full test coverage.
