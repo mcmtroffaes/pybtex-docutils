@@ -97,6 +97,30 @@ class TestCitation(TestCase):
             'hongquin1997'
             '</citation_reference>')
 
+    def test_citation_use_label(self):
+        node = self.backend.citation(
+            self.entry, self.document, use_key_as_label=False)
+        nose.tools.assert_equal(
+            str(node),
+            '<citation ids="hongquin1997" names="hongquin1997">'
+            '<label>1</label>'
+            '<paragraph>'
+            'Hongquin Liu and Eli Ruckenstein. '
+            'Predicting the diffusion coefficient in supercritical fluids. '
+            '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+            '36:888\\u2013895, 1997.'
+            '</paragraph>'
+            '</citation>')
+
+    def test_citation_reference_use_label(self):
+        node = self.backend.citation_reference(
+            self.entry, self.document, use_key_as_label=False)
+        nose.tools.assert_equal(
+            str(node),
+            '<citation_reference ids="id1" refname="hongquin1997">'
+            '1'
+            '</citation_reference>')
+
     def tearDown(self):
         del self.backend
         del self.entry
