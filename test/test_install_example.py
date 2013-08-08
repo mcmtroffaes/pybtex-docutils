@@ -1,13 +1,16 @@
-Install the module with ``pip install pybtex-docutils``, or from
-source using ``python setup.py install``.
+# -*- coding: utf-8 -*-
 
-.. _minimal-example:
+import nose.tools
 
-Minimal Example
----------------
+expected_result = (
+    u'<paragraph>D.\xa0Lindley. <emphasis>Making Decisions</emphasis>. '
+    u'Wiley, 2nd edition, 1985.</paragraph>'
+    )
 
-.. code-block:: python
+def test_install_example():
+    result = []
 
+    ### example begin ###
     import StringIO
     import pybtex.database.input.bibtex
     import pybtex.plugin
@@ -26,12 +29,8 @@ Minimal Example
     """))
     for entry in style.format_entries(data.entries.itervalues()):
         print(backend.paragraph(entry))
+    ### example end ###
+        result.append(backend.paragraph(entry))
 
-would produce:
-
-.. code-block:: xml
-
-   <paragraph>
-     D. Lindley. <emphasis>Making Decisions</emphasis>.
-     Wiley, 2nd edition, 1985.
-   </paragraph>
+    nose.tools.assert_equal(len(result), 1)
+    nose.tools.assert_equal(unicode(result[0]), expected_result)
