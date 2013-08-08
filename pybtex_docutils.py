@@ -15,9 +15,9 @@ class Backend(BaseBackend):
     name = 'docutils'
 
     symbols = {
-        'ndash': docutils.nodes.inline(u'\u2013', u'\u2013'),
-        'newblock': docutils.nodes.inline(u' ', u' '),
-        'nbsp': docutils.nodes.inline(u'\u00a0', u'\u00a0')
+        'ndash': [docutils.nodes.Text(u'\u2013', u'\u2013')],
+        'newblock': [docutils.nodes.Text(u' ', u' ')],
+        'nbsp': [docutils.nodes.Text(u'\u00a0', u'\u00a0')],
     }
     tags = {
         'emph': docutils.nodes.emphasis,
