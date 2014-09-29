@@ -8,9 +8,8 @@ branches:
   only:
     - develop
 install:
-  - "pip install coveralls --use-mirrors"
-  - "pip install -e bzr+lp:pybtex#egg=pybtex" # needs trunk for now
-  - "pip install . --use-mirrors"
+  - "pip install coveralls"
+  - "pip install ."
 before_script:
   - "if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then 2to3 -w -n test; fi"
   - "if [[ $TRAVIS_PYTHON_VERSION == '3.3' ]]; then 2to3 -w -n test; fi"
