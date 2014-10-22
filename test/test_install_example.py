@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import nose.tools
-import six
 
 expected_result = (
     u'<paragraph>D.\xa0Lindley. <emphasis>Making Decisions</emphasis>. '
@@ -12,14 +11,14 @@ def test_install_example():
     result = []
 
     ### example begin ###
-    from six import StringIO
+    import six
     import pybtex.database.input.bibtex
     import pybtex.plugin
 
     style = pybtex.plugin.find_plugin('pybtex.style.formatting', 'plain')()
     backend = pybtex.plugin.find_plugin('pybtex.backends', 'docutils')()
     parser = pybtex.database.input.bibtex.Parser()
-    data = parser.parse_stream(StringIO(u"""
+    data = parser.parse_stream(six.StringIO(u"""
     @Book{1985:lindley,
       author =    {D. Lindley},
       title =     {Making Decisions},
