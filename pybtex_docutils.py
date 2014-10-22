@@ -27,6 +27,7 @@ import itertools
 
 from pybtex.backends import BaseBackend
 import pybtex.richtext
+import six
 
 
 class Backend(BaseBackend):
@@ -47,18 +48,18 @@ class Backend(BaseBackend):
         return self.format_str(text)
 
     def format_str(self, str_):
-        assert isinstance(str_, basestring)
+        assert isinstance(str_, six.string_types)
         return [docutils.nodes.Text(str_, str_)]
 
     def format_tag(self, tag_name, text):
-        assert isinstance(tag_name, basestring)
+        assert isinstance(tag_name, six.string_types)
         assert isinstance(text, self.RenderType)
         tag = self.tags[tag_name]
         node = tag('', '', *text)
         return [node]
 
     def format_href(self, url, text):
-        assert isinstance(url, basestring)
+        assert isinstance(url, six.string_types)
         assert isinstance(text, self.RenderType)
         node = docutils.nodes.reference('', '', *text, refuri=url)
         return [node]

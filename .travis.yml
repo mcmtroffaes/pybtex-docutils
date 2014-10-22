@@ -11,10 +11,6 @@ branches:
 install:
   - "pip install coveralls"
   - "pip install ."
-before_script:
-  - "if [[ $TRAVIS_PYTHON_VERSION == '3.2' ]]; then 2to3 -w -n test; fi"
-  - "if [[ $TRAVIS_PYTHON_VERSION == '3.3' ]]; then 2to3 -w -n test; fi"
-  - "if [[ $TRAVIS_PYTHON_VERSION == '3.4' ]]; then 2to3 -w -n test; fi"
 script:
   - "cd test"
   - "coverage run --source=pybtex_docutils `type -p nosetests`"

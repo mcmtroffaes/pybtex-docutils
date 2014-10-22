@@ -9,6 +9,7 @@ from pybtex.richtext import HRef, Tag, Text
 from unittest import TestCase
 
 from pybtex_docutils import Backend
+import six
 
 
 def render_str(richtext):
@@ -77,14 +78,14 @@ class TestCitation(TestCase):
                 )})
         style = pybtex.plugin.find_plugin('pybtex.style.formatting', 'plain')()
         self.backend = Backend()
-        entries = list(style.format_entries(data.entries.itervalues()))
+        entries = list(style.format_entries(six.itervalues(data.entries)))
         self.entry = entries[0]
         self.document = docutils.utils.new_document('test.rst')
 
     def test_citation(self):
         node = self.backend.citation(self.entry, self.document)
         nose.tools.assert_equal(
-            unicode(node),
+            six.text_type(node),
             u'<citation ids="hongquin1997" names="hongquin1997">'
             u'<label>hongquin1997</label>'
             u'<paragraph>'
@@ -107,7 +108,7 @@ class TestCitation(TestCase):
         node = self.backend.citation(
             self.entry, self.document, use_key_as_label=False)
         nose.tools.assert_equal(
-            unicode(node),
+            six.text_type(node),
             u'<citation ids="hongquin1997" names="hongquin1997">'
             u'<label>1</label>'
             u'<paragraph>'
