@@ -3,6 +3,9 @@
 
 * Add Python 3.4 support, drop Python 3.2 support.
 
+* Support more tags, also fail gracefully on unknown tags (see issue
+  #6, reported by Jellby).
+
 0.2.0 (8 August 2013)
 ---------------------
 

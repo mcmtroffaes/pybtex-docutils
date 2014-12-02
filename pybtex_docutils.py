@@ -39,7 +39,12 @@ class Backend(BaseBackend):
         'nbsp': [docutils.nodes.Text(u'\u00a0', u'\u00a0')],
     }
     tags = {
-        'emph': docutils.nodes.emphasis,
+        'emph': docutils.nodes.emphasis,  # note: deprecated
+        'em': docutils.nodes.emphasis,
+        'strong': docutils.nodes.strong,
+        'i': docutils.nodes.emphasis,
+        'b': docutils.nodes.strong,
+        'tt': docutils.nodes.literal,
     }
     RenderType = list
 
@@ -54,9 +59,11 @@ class Backend(BaseBackend):
     def format_tag(self, tag_name, text):
         assert isinstance(tag_name, six.string_types)
         assert isinstance(text, self.RenderType)
-        tag = self.tags[tag_name]
-        node = tag('', '', *text)
-        return [node]
+        if tag_name in self.tags:
+            tag = self.tags[tag_name]
+            return [tag('', '', *text)]
+        else:
+            return text
 
     def format_href(self, url, text):
         assert isinstance(url, six.string_types)
