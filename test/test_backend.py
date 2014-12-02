@@ -33,6 +33,31 @@ def test_tag_text():
         render_str(tag), '<emphasis>hello world</emphasis>')
 
 
+def test_tag_strong():
+    tag = Tag('strong', 'hello')
+    nose.tools.assert_equal(render_str(tag), '<strong>hello</strong>')
+
+
+def test_tag_i():
+    tag = Tag('i', 'hello')
+    nose.tools.assert_equal(render_str(tag), '<emphasis>hello</emphasis>')
+
+
+def test_tag_b():
+    tag = Tag('b', 'hello')
+    nose.tools.assert_equal(render_str(tag), '<strong>hello</strong>')
+
+
+def test_tag_tt():
+    tag = Tag('tt', 'hello')
+    nose.tools.assert_equal(render_str(tag), '<literal>hello</literal>')
+
+
+def test_tag_unknown():
+    tag = Tag('***unknown***', 'hello')
+    nose.tools.assert_equal(render_str(tag), 'hello')
+
+
 def test_href():
     href = HRef('http://www.example.com', 'hyperlinked text')
     nose.tools.assert_equal(
