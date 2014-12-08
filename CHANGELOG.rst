@@ -6,6 +6,8 @@
 * Support more tags, also fail gracefully on unknown tags (see issue
   #6, reported by Jellby).
 
+* Use universal wheel for distribution.
+
 0.2.0 (8 August 2013)
 ---------------------
 
