@@ -1,5 +1,5 @@
-0.2.1 (in development)
-----------------------
+0.2.1 (8 December 2014)
+-----------------------
 
 * Add Python 3.4 support, drop Python 3.2 support.
 
