@@ -147,4 +147,5 @@ class Backend(BaseBackend):
         refnode = docutils.nodes.footnote_reference(
             '[#%s]_' % entry.key, refname=refname, auto=1)
         document.note_autofootnote_ref(refnode)
+        document.note_footnote_ref(refnode)
         return refnode
