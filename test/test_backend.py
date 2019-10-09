@@ -153,6 +153,27 @@ class TestCitation(TestCase):
             '1'
             '</citation_reference>')
 
+    def test_footnote(self):
+        node = self.backend.footnote(self.entry, self.document)
+        print(node)
+        nose.tools.assert_equal(
+            six.text_type(node),
+            u'<footnote auto="1" ids="hongquin1997" names="hongquin1997">'
+            u'<paragraph>'
+            u'Hongquin Liu and Eli Ruckenstein. '
+            u'Predicting the diffusion coefficient in supercritical fluids. '
+            u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+            u'36:888–895, 1997.'
+            u'</paragraph>'
+            u'</footnote>')
+
+    def test_footnote_reference(self):
+        node = self.backend.footnote_reference(self.entry, self.document)
+        nose.tools.assert_equal(
+            str(node),
+            '<footnote_reference auto="1" ids="[\'id1\']" '
+            'refname="hongquin1997"/>')
+
     def tearDown(self):
         del self.backend
         del self.entry
