@@ -1,5 +1,10 @@
-0.2.2 (in development)
+0.2.2 (9 October 2019)
 ----------------------
+
+* Drop Python 3.3 support.
+
+* New footnote and footnote_reference methods for docutils footnote
+  support.
 
 0.2.1 (8 December 2014)
 -----------------------
