@@ -159,6 +159,56 @@ class TestCitation(TestCase):
         del self.document
 
 
+class TestFootnote(TestCase):
+
+    def setUp(self):
+        data = pybtex.database.BibliographyData({
+            'hongquin1997': pybtex.database.Entry(
+                'article',
+                fields={
+                    'language': u'english',
+                    'title': u'Predicting the Diffusion Coefficient in Supercritical Fluids',
+                    'journal': u'Ind. Eng. Chem. Res.',
+                    'volume': u'36',
+                    'year': u'1997',
+                    'pages': u'888-895',
+                },
+                persons={'author': [
+                    pybtex.database.Person(u'Liu, Hongquin'),
+                    pybtex.database.Person(u'Ruckenstein, Eli')]},
+                )})
+        style = pybtex.plugin.find_plugin('pybtex.style.formatting', 'plain')()
+        self.backend = Backend()
+        entries = list(style.format_entries(six.itervalues(data.entries)))
+        self.entry = entries[0]
+        self.document = docutils.utils.new_document('test.rst')
+
+    def test_footnote(self):
+        node = self.backend.footnote(self.entry, self.document)
+        print(node)
+        nose.tools.assert_equal(
+            six.text_type(node),
+            u'<footnote auto="1" ids="hongquin1997" names="hongquin1997">'
+            u'<paragraph>'
+            u'Hongquin Liu and Eli Ruckenstein. '
+            u'Predicting the diffusion coefficient in supercritical fluids. '
+            u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+            u'36:888–895, 1997.'
+            u'</paragraph>'
+            u'</footnote>')
+
+    def test_footnote_reference(self):
+        node = self.backend.footnote_reference(self.entry, self.document)
+        nose.tools.assert_equal(
+            str(node),
+            '<footnote_reference auto="1" ids="[\'id1\']" refname="hongquin1997"/>')
+
+    def tearDown(self):
+        del self.backend
+        del self.entry
+        del self.document
+
+
 @nose.tools.raises(NotImplementedError)
 def test_write_entry():
     Backend().write_entry(None, None, None)

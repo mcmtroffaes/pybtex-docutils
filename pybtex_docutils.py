@@ -122,3 +122,29 @@ class Backend(BaseBackend):
         refnode += docutils.nodes.Text(label)
         document.note_citation_ref(refnode)
         return refnode
+
+    def footnote(self, entry, document):
+        """Return footnote node, with key as name, and paragraph with
+        entry text as child. The footnote is expected to be
+        inserted into *document* prior to any docutils transforms.
+        """
+        # see docutils.parsers.rst.states.Body.footnote()
+        name = docutils.nodes.fully_normalize_name(entry.key)
+        footnote = docutils.nodes.footnote(auto=1)
+        footnote['names'].append(name)
+        footnote += self.paragraph(entry)
+        document.note_autofootnote(footnote)
+        document.note_explicit_target(footnote, footnote)
+        return footnote
+
+    def footnote_reference(self, entry, document):
+        """Return footnote_reference node to the given citation. The
+        footnote_reference is expected to be inserted into *document*
+        prior to any docutils transforms.
+        """
+        # see docutils.parsers.rst.states.Body.footnote_reference()
+        refname = docutils.nodes.fully_normalize_name(entry.key)
+        refnode = docutils.nodes.footnote_reference(
+            '[#%s]_' % entry.key, refname=refname, auto=1)
+        document.note_autofootnote_ref(refnode)
+        return refnode
