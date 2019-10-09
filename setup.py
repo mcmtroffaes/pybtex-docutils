@@ -24,7 +24,7 @@ setup(
     long_description="\n".join(doclines[2:]),
     zip_safe=True,
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
@@ -49,4 +49,5 @@ setup(
             'docutils = pybtex_docutils:Backend',
         ]
     },
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*',
 )
