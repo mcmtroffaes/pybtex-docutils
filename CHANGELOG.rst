@@ -1,3 +1,8 @@
+0.2.3 (in development)
+----------------------
+
+* Drop Python 3.4 support.
+
 0.2.2 (9 October 2019)
 ----------------------
 
