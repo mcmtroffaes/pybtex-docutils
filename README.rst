@@ -4,12 +4,12 @@ A docutils backend for pybtex.
 
 * Documentation: http://pybtex-docutils.readthedocs.org/
 
-* Development: http://github.com/mcmtroffaes/pybtex-docutils/ |imagetravis| |imagecoveralls|
+* Development: http://github.com/mcmtroffaes/pybtex-docutils/ |imagetravis| |imagecodecov|
 
 .. |imagetravis| image:: https://travis-ci.org/mcmtroffaes/pybtex-docutils.png?branch=develop
        :target: https://travis-ci.org/mcmtroffaes/pybtex-docutils
        :alt: travis-ci
 
-.. |imagecoveralls| image:: https://coveralls.io/repos/mcmtroffaes/pybtex-docutils/badge.png?branch=develop
-       :target: https://coveralls.io/r/mcmtroffaes/pybtex-docutils?branch=develop
-       :alt: coveralls.io
+.. |imagecodecov| image:: https://codecov.io/gh/mcmtroffaes/pybtex-docutils/branch/develop/graph/badge.svg
+       :target: https://codecov.io/gh/mcmtroffaes/pybtex-docutils
+       :alt: codecov
