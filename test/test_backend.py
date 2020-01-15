@@ -21,12 +21,12 @@ def test_text():
 
 
 def test_tag():
-    tag = Tag('emph', 'hello')
+    tag = Tag('em', 'hello')
     assert render_str(tag) == '<emphasis>hello</emphasis>'
 
 
 def test_tag_text():
-    tag = Tag('emph', Text('hello', ' world'))
+    tag = Tag('em', Text('hello', ' world'))
     assert render_str(tag) == '<emphasis>hello world</emphasis>'
 
 
@@ -72,7 +72,7 @@ def test_href_text():
 
 
 def test_render_sequence():
-    text = Text('hello ', Tag('emph', 'world'))
+    text = Text('hello ', Tag('em', 'world'))
     assert render_str(text) == 'hello <emphasis>world</emphasis>'
 
 
