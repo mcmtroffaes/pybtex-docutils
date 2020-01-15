@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import nose.tools
-
 expected_result = (
     u'<paragraph>D.\xa0Lindley. <emphasis>Making Decisions</emphasis>. '
     u'Wiley, 2nd edition, 1985.</paragraph>'
@@ -32,5 +30,5 @@ def test_install_example():
     ### example end ###
         result.append(backend.paragraph(entry))
 
-    nose.tools.assert_equal(len(result), 1)
-    nose.tools.assert_equal(six.text_type(result[0]), expected_result)
+    assert len(result) == 1
+    assert six.text_type(result[0]) == expected_result

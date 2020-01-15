@@ -2,7 +2,7 @@
 
 import docutils.nodes
 import docutils.utils
-import nose.tools
+import pytest
 import pybtex.plugin
 import pybtex.database
 from pybtex.richtext import HRef, Tag, Text
@@ -18,50 +18,47 @@ def render_str(richtext):
 
 # may remove this test when new pybtex is out
 def test_text():
-    nose.tools.assert_equal(
-        Backend().format_text('hi'), Backend().format_str('hi'))
+    assert Backend().format_text('hi') == Backend().format_str('hi')
 
 
 def test_tag():
     tag = Tag('emph', 'hello')
-    nose.tools.assert_equal(render_str(tag), '<emphasis>hello</emphasis>')
+    assert render_str(tag) == '<emphasis>hello</emphasis>'
 
 
 def test_tag_text():
     tag = Tag('emph', Text('hello', ' world'))
-    nose.tools.assert_equal(
-        render_str(tag), '<emphasis>hello world</emphasis>')
+    assert render_str(tag) == '<emphasis>hello world</emphasis>'
 
 
 def test_tag_strong():
     tag = Tag('strong', 'hello')
-    nose.tools.assert_equal(render_str(tag), '<strong>hello</strong>')
+    assert render_str(tag) == '<strong>hello</strong>'
 
 
 def test_tag_i():
     tag = Tag('i', 'hello')
-    nose.tools.assert_equal(render_str(tag), '<emphasis>hello</emphasis>')
+    assert render_str(tag) == '<emphasis>hello</emphasis>'
 
 
 def test_tag_b():
     tag = Tag('b', 'hello')
-    nose.tools.assert_equal(render_str(tag), '<strong>hello</strong>')
+    assert render_str(tag) == '<strong>hello</strong>'
 
 
 def test_tag_tt():
     tag = Tag('tt', 'hello')
-    nose.tools.assert_equal(render_str(tag), '<literal>hello</literal>')
+    assert render_str(tag) == '<literal>hello</literal>'
 
 
 def test_tag_unknown():
     tag = Tag('***unknown***', 'hello')
-    nose.tools.assert_equal(render_str(tag), 'hello')
+    assert render_str(tag) == 'hello'
 
 
 def test_href():
     href = HRef('http://www.example.com', 'hyperlinked text')
-    nose.tools.assert_equal(
-        render_str(href),
+    assert render_str(href) == (
         '<reference refuri="http://www.example.com">'
         'hyperlinked text'
         '</reference>')
@@ -69,8 +66,7 @@ def test_href():
 
 def test_href_text():
     href = HRef('http://www.example.com', Text('hyperlinked', ' text'))
-    nose.tools.assert_equal(
-        render_str(href),
+    assert render_str(href) == (
         '<reference refuri="http://www.example.com">'
         'hyperlinked text'
         '</reference>')
@@ -78,9 +74,7 @@ def test_href_text():
 
 def test_render_sequence():
     text = Text('hello ', Tag('emph', 'world'))
-    nose.tools.assert_equal(
-        render_str(text),
-        'hello <emphasis>world</emphasis>')
+    assert render_str(text) == 'hello <emphasis>world</emphasis>'
 
 
 class TestCitation(TestCase):
@@ -109,8 +103,7 @@ class TestCitation(TestCase):
 
     def test_citation(self):
         node = self.backend.citation(self.entry, self.document)
-        nose.tools.assert_equal(
-            six.text_type(node),
+        assert six.text_type(node) == (
             u'<citation ids="hongquin1997" names="hongquin1997">'
             u'<label>hongquin1997</label>'
             u'<paragraph>'
@@ -123,8 +116,7 @@ class TestCitation(TestCase):
 
     def test_citation_reference(self):
         node = self.backend.citation_reference(self.entry, self.document)
-        nose.tools.assert_equal(
-            str(node),
+        assert str(node) == (
             '<citation_reference ids="id1" refname="hongquin1997">'
             'hongquin1997'
             '</citation_reference>')
@@ -132,8 +124,7 @@ class TestCitation(TestCase):
     def test_citation_use_label(self):
         node = self.backend.citation(
             self.entry, self.document, use_key_as_label=False)
-        nose.tools.assert_equal(
-            six.text_type(node),
+        assert six.text_type(node) == (
             u'<citation ids="hongquin1997" names="hongquin1997">'
             u'<label>1</label>'
             u'<paragraph>'
@@ -147,17 +138,14 @@ class TestCitation(TestCase):
     def test_citation_reference_use_label(self):
         node = self.backend.citation_reference(
             self.entry, self.document, use_key_as_label=False)
-        nose.tools.assert_equal(
-            str(node),
+        assert str(node) == (
             '<citation_reference ids="id1" refname="hongquin1997">'
             '1'
             '</citation_reference>')
 
     def test_footnote(self):
         node = self.backend.footnote(self.entry, self.document)
-        print(node)
-        nose.tools.assert_equal(
-            six.text_type(node),
+        assert six.text_type(node) == (
             u'<footnote auto="1" ids="hongquin1997" names="hongquin1997">'
             u'<paragraph>'
             u'Hongquin Liu and Eli Ruckenstein. '
@@ -169,8 +157,7 @@ class TestCitation(TestCase):
 
     def test_footnote_reference(self):
         node = self.backend.footnote_reference(self.entry, self.document)
-        nose.tools.assert_equal(
-            str(node),
+        assert str(node) == (
             '<footnote_reference auto="1" ids="[\'id1\']" '
             'refname="hongquin1997"/>')
 
@@ -180,6 +167,6 @@ class TestCitation(TestCase):
         del self.document
 
 
-@nose.tools.raises(NotImplementedError)
 def test_write_entry():
-    Backend().write_entry(None, None, None)
+    with pytest.raises(NotImplementedError):
+        Backend().write_entry(None, None, None)

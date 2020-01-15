@@ -1,4 +1,5 @@
 language: python
+sudo: false
 python:
   - "3.9-dev"
   - "3.8"
@@ -10,10 +11,11 @@ branches:
   only:
     - develop
 install:
-  - "pip install coveralls"
+  - "pip install --upgrade pytest"
+  - "pip install pytest-cov"
   - "pip install ."
 script:
   - "cd test"
-  - "coverage run --source=pybtex_docutils `type -p nosetests`"
+  - "pytest --cov-report=xml --cov=pybtex_docutils ."
 after_success:
-  - "coveralls"
+  - bash <(curl -s https://codecov.io/bash)
