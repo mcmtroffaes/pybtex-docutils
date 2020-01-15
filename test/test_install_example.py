@@ -5,10 +5,11 @@ expected_result = (
     u'Wiley, 2nd edition, 1985.</paragraph>'
     )
 
+
 def test_install_example():
     result = []
 
-    ### example begin ###
+    # example begin
     import six
     import pybtex.database.input.bibtex
     import pybtex.plugin
@@ -27,7 +28,7 @@ def test_install_example():
     """))
     for entry in style.format_entries(six.itervalues(data.entries)):
         print(backend.paragraph(entry))
-    ### example end ###
+    # example end
         result.append(backend.paragraph(entry))
 
     assert len(result) == 1
