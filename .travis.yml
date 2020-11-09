@@ -1,11 +1,9 @@
 language: python
-sudo: false
+dist: focal
 python:
   - "3.8"
   - "3.7"
   - "3.6"
-  - "3.5"
-  - "2.7"
 branches:
   only:
     - develop
