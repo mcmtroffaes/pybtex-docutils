@@ -6,7 +6,7 @@ A docutils backend for pybtex.
 
 * Development: http://github.com/mcmtroffaes/pybtex-docutils/ |imagetravis| |imagecodecov|
 
-.. |imagetravis| image:: https://travis-ci.org/mcmtroffaes/pybtex-docutils.png?branch=develop
+.. |imagetravis| image:: https://travis-ci.com/mcmtroffaes/pybtex-docutils.png?branch=develop
        :target: https://travis-ci.org/mcmtroffaes/pybtex-docutils
        :alt: travis-ci
 
