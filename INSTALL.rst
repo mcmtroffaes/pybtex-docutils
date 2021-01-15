@@ -24,7 +24,7 @@ Minimal Example
       edition =   {2nd},
     }
     """))
-    for entry in style.format_entries(data.entries.values())):
+    for entry in style.format_entries(data.entries.values()):
         print(backend.paragraph(entry))
 
 would produce:
