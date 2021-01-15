@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 expected_result = (
     '<paragraph>D.\xa0Lindley. <emphasis>Making Decisions</emphasis>. '
     'Wiley, 2nd edition, 1985.</paragraph>'

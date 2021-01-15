@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # pybtex-docutils documentation build configuration file, created by
 # sphinx-quickstart on Wed Aug  7 11:36:09 2013.
 #

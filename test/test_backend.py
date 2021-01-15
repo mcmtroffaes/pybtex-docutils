@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import docutils.nodes
 import docutils.utils
 import pytest
