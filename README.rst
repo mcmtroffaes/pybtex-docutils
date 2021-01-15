@@ -1,8 +1,8 @@
 A docutils backend for pybtex.
 
-* Download: http://pypi.python.org/pypi/pybtex-docutils/#downloads
+* Download: https://pypi.org/project/pybtex-docutils/#files
 
-* Documentation: http://pybtex-docutils.readthedocs.org/
+* Documentation: https://pybtex-docutils.readthedocs.io/
 
 * Development: http://github.com/mcmtroffaes/pybtex-docutils/ |imagetravis| |imagecodecov|
 
