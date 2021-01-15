@@ -19,7 +19,8 @@ as in the :ref:`minimal example <minimal-example>`.
 
 .. autoclass:: Backend
    :show-inheritance:
-   :members: RenderType, paragraph, citation, citation_reference
+   :members: RenderType, paragraph, citation, citation_reference,
+             footnote, footnote_reference
 """
 
 import docutils.nodes
@@ -135,6 +136,8 @@ class Backend(BaseBackend):
         """Return footnote node, with key as name, and paragraph with
         entry text as child. The footnote is expected to be
         inserted into *document* prior to any docutils transforms.
+
+        .. versionadded:: 0.2.2
         """
         # see docutils.parsers.rst.states.Body.footnote()
         name = docutils.nodes.fully_normalize_name(entry.key)
@@ -151,6 +154,8 @@ class Backend(BaseBackend):
         """Return footnote_reference node to the given citation. The
         footnote_reference is expected to be inserted into *document*
         prior to any docutils transforms.
+
+        .. versionadded:: 0.2.2
         """
         # see docutils.parsers.rst.states.Body.footnote_reference()
         refname = docutils.nodes.fully_normalize_name(entry.key)
