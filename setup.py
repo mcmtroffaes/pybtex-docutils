@@ -8,6 +8,7 @@ def readfile(filename):
     with codecs.open(filename, encoding="utf-8") as stream:
         return stream.read().split("\n")
 
+
 doclines = readfile("README.rst")
 requires = readfile("requirements.txt")
 version = readfile("VERSION")[0].strip()
@@ -34,13 +35,13 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Text Editors :: Text Processing',
         'Topic :: Text Processing :: Markup :: XML'
     ],
     platforms='any',
     py_modules=['pybtex_docutils'],
     install_requires=requires,
-    use_2to3=True,
     entry_points={
         'pybtex.backends': [
             'docutils = pybtex_docutils:Backend',

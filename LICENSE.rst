@@ -1,5 +1,5 @@
 | pybtex-docutils is a docutils backend for pybtex
-| Copyright (c) 2013-2014 by Matthias C. M. Troffaes
+| Copyright (c) 2013-2021 by Matthias C. M. Troffaes
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

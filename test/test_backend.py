@@ -8,7 +8,6 @@ import pybtex.database
 from pybtex.richtext import HRef, Tag, Text
 
 from pybtex_docutils import Backend
-import six
 
 
 def render_str(richtext):
@@ -50,6 +49,16 @@ def test_tag_tt():
     assert render_str(tag) == '<literal>hello</literal>'
 
 
+def test_tag_sup():
+    tag = Tag('sup', 'hello')
+    assert render_str(tag) == '<superscript>hello</superscript>'
+
+
+def test_tag_sub():
+    tag = Tag('sub', 'hello')
+    assert render_str(tag) == '<subscript>hello</subscript>'
+
+
 def test_tag_unknown():
     tag = Tag('***unknown***', 'hello')
     assert render_str(tag) == 'hello'
@@ -82,19 +91,19 @@ def entry():
         'hongquin1997': pybtex.database.Entry(
             'article',
             fields={
-                'language': u'english',
-                'title': u'Predicting the Diffusion Coefficient in Supercritical Fluids',
-                'journal': u'Ind. Eng. Chem. Res.',
-                'volume': u'36',
-                'year': u'1997',
-                'pages': u'888-895',
+                'language': 'english',
+                'title': 'Predicting the Diffusion Coefficient in Supercritical Fluids',
+                'journal': 'Ind. Eng. Chem. Res.',
+                'volume': '36',
+                'year': '1997',
+                'pages': '888-895',
             },
             persons={'author': [
-                pybtex.database.Person(u'Liu, Hongquin'),
-                pybtex.database.Person(u'Ruckenstein, Eli')]},
+                pybtex.database.Person('Liu, Hongquin'),
+                pybtex.database.Person('Ruckenstein, Eli')]},
             )})
     style = pybtex.plugin.find_plugin('pybtex.style.formatting', 'plain')()
-    entries = list(style.format_entries(six.itervalues(data.entries)))
+    entries = list(style.format_entries(data.entries.values()))
     return entries[0]
 
 
@@ -105,16 +114,16 @@ def document():
 
 def test_citation(entry, document):
     node = Backend().citation(entry, document)
-    assert six.text_type(node) == (
-        u'<citation ids="hongquin1997" names="hongquin1997">'
-        u'<label>hongquin1997</label>'
-        u'<paragraph>'
-        u'Hongquin Liu and Eli Ruckenstein. '
-        u'Predicting the diffusion coefficient in supercritical fluids. '
-        u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
-        u'36:888–895, 1997.'
-        u'</paragraph>'
-        u'</citation>')
+    assert str(node) == (
+        '<citation ids="hongquin1997" names="hongquin1997">'
+        '<label>hongquin1997</label>'
+        '<paragraph>'
+        'Hongquin Liu and Eli Ruckenstein. '
+        'Predicting the diffusion coefficient in supercritical fluids. '
+        '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+        '36:888–895, 1997.'
+        '</paragraph>'
+        '</citation>')
 
 
 def test_citation_reference(entry, document):
@@ -128,16 +137,16 @@ def test_citation_reference(entry, document):
 def test_citation_use_label(entry, document):
     node = Backend().citation(
         entry, document, use_key_as_label=False)
-    assert six.text_type(node) == (
-        u'<citation ids="hongquin1997" names="hongquin1997">'
-        u'<label>1</label>'
-        u'<paragraph>'
-        u'Hongquin Liu and Eli Ruckenstein. '
-        u'Predicting the diffusion coefficient in supercritical fluids. '
-        u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
-        u'36:888–895, 1997.'
-        u'</paragraph>'
-        u'</citation>')
+    assert str(node) == (
+        '<citation ids="hongquin1997" names="hongquin1997">'
+        '<label>1</label>'
+        '<paragraph>'
+        'Hongquin Liu and Eli Ruckenstein. '
+        'Predicting the diffusion coefficient in supercritical fluids. '
+        '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+        '36:888–895, 1997.'
+        '</paragraph>'
+        '</citation>')
 
 
 def test_citation_reference_use_label(entry, document):
@@ -151,15 +160,15 @@ def test_citation_reference_use_label(entry, document):
 
 def test_footnote(entry, document):
     node = Backend().footnote(entry, document)
-    assert six.text_type(node) == (
-        u'<footnote auto="1" ids="hongquin1997" names="hongquin1997">'
-        u'<paragraph>'
-        u'Hongquin Liu and Eli Ruckenstein. '
-        u'Predicting the diffusion coefficient in supercritical fluids. '
-        u'<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
-        u'36:888–895, 1997.'
-        u'</paragraph>'
-        u'</footnote>')
+    assert str(node) == (
+        '<footnote auto="1" ids="hongquin1997" names="hongquin1997">'
+        '<paragraph>'
+        'Hongquin Liu and Eli Ruckenstein. '
+        'Predicting the diffusion coefficient in supercritical fluids. '
+        '<emphasis>Ind. Eng. Chem. Res.</emphasis>, '
+        '36:888–895, 1997.'
+        '</paragraph>'
+        '</footnote>')
 
 
 def test_footnote_reference(entry, document):

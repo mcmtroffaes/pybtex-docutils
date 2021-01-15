@@ -1,0 +1,9 @@
+*.pyc
+*~
+doc/_build/
+.pytest_cache/
+.mypy_cache/
+venv/
+htmlcov/
+.idea/
+*.egg-info/

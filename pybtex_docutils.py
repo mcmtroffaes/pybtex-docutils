@@ -26,17 +26,19 @@ import docutils.nodes
 import itertools
 
 from pybtex.backends import BaseBackend
-import pybtex.richtext
-import six
+from typing import TYPE_CHECKING, List, Type
+
+if TYPE_CHECKING:
+    from pybtex.style import FormattedEntry
 
 
 class Backend(BaseBackend):
     name = 'docutils'
 
     symbols = {
-        'ndash': [docutils.nodes.Text(u'\u2013', u'\u2013')],
-        'newblock': [docutils.nodes.Text(u' ', u' ')],
-        'nbsp': [docutils.nodes.Text(u'\u00a0', u'\u00a0')],
+        'ndash': [docutils.nodes.Text('\u2013', '\u2013')],
+        'newblock': [docutils.nodes.Text(' ', ' ')],
+        'nbsp': [docutils.nodes.Text('\u00a0', '\u00a0')],
     }
     tags = {
         'emph': docutils.nodes.emphasis,  # note: deprecated
@@ -45,39 +47,40 @@ class Backend(BaseBackend):
         'i': docutils.nodes.emphasis,
         'b': docutils.nodes.strong,
         'tt': docutils.nodes.literal,
+        'sup': docutils.nodes.superscript,
+        'sub': docutils.nodes.subscript,
     }
-    RenderType = list
+
+    RenderType: Type[List[docutils.nodes.Node]] = list
 
     # for compatibility only
-    def format_text(self, text):
+    def format_text(self, text: str) -> List[docutils.nodes.Node]:
         return self.format_str(text)
 
-    def format_str(self, str_):
-        assert isinstance(str_, six.string_types)
+    def format_str(self, str_: str) -> List[docutils.nodes.Node]:
         return [docutils.nodes.Text(str_, str_)]
 
-    def format_tag(self, tag_name, text):
-        assert isinstance(tag_name, six.string_types)
-        assert isinstance(text, self.RenderType)
+    def format_tag(self, tag_name: str, text: List[docutils.nodes.Node]
+                   ) -> List[docutils.nodes.Node]:
         if tag_name in self.tags:
             tag = self.tags[tag_name]
             return [tag('', '', *text)]
         else:
             return text
 
-    def format_href(self, url, text):
-        assert isinstance(url, six.string_types)
-        assert isinstance(text, self.RenderType)
+    def format_href(self, url: str, text: List[docutils.nodes.Node]
+                    ) -> List[docutils.nodes.Node]:
         node = docutils.nodes.reference('', '', *text, refuri=url)
         return [node]
 
-    def write_entry(self, key, label, text):
+    def write_entry(self, key: str, label: str, text: str) -> None:
         raise NotImplementedError("use Backend.citation() instead")
 
-    def render_sequence(self, rendered_list):
+    def render_sequence(self, rendered_list: List[List[docutils.nodes.Node]]
+                        ) -> List[docutils.nodes.Node]:
         return list(itertools.chain(*rendered_list))
 
-    def paragraph(self, entry):
+    def paragraph(self, entry: "FormattedEntry") -> docutils.nodes.paragraph:
         """Return a docutils.nodes.paragraph
         containing the rendered text for *entry* (without label).
 
@@ -85,7 +88,9 @@ class Backend(BaseBackend):
         """
         return docutils.nodes.paragraph('', '', *entry.text.render(self))
 
-    def citation(self, entry, document, use_key_as_label=True):
+    def citation(self, entry: "FormattedEntry",
+                 document: docutils.nodes.document, use_key_as_label=True
+                 ) -> docutils.nodes.citation:
         """Return citation node, with key as name, label as first
         child, and paragraph with entry text as second child. The citation is
         expected to be inserted into *document* prior to any docutils
@@ -97,7 +102,6 @@ class Backend(BaseBackend):
         else:
             label = entry.label
         name = docutils.nodes.fully_normalize_name(entry.key)
-        text = entry.text.render(self)
         citation = docutils.nodes.citation()
         citation['names'].append(name)
         citation += docutils.nodes.label('', label)
@@ -106,7 +110,10 @@ class Backend(BaseBackend):
         document.note_explicit_target(citation, citation)
         return citation
 
-    def citation_reference(self, entry, document, use_key_as_label=True):
+    def citation_reference(
+            self, entry: "FormattedEntry",
+            document: docutils.nodes.document, use_key_as_label=True
+            ) -> docutils.nodes.citation_reference:
         """Return citation_reference node to the given citation. The
         citation_reference is expected to be inserted into *document*
         prior to any docutils transforms.
@@ -123,7 +130,8 @@ class Backend(BaseBackend):
         document.note_citation_ref(refnode)
         return refnode
 
-    def footnote(self, entry, document):
+    def footnote(self, entry: "FormattedEntry",
+                 document: docutils.nodes.document) -> docutils.nodes.footnote:
         """Return footnote node, with key as name, and paragraph with
         entry text as child. The footnote is expected to be
         inserted into *document* prior to any docutils transforms.
@@ -137,7 +145,9 @@ class Backend(BaseBackend):
         document.note_explicit_target(footnote, footnote)
         return footnote
 
-    def footnote_reference(self, entry, document):
+    def footnote_reference(self, entry: "FormattedEntry",
+                           document: docutils.nodes.document
+                           ) -> docutils.nodes.footnote_reference:
         """Return footnote_reference node to the given citation. The
         footnote_reference is expected to be inserted into *document*
         prior to any docutils transforms.
