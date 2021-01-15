@@ -92,7 +92,8 @@ def entry():
             'article',
             fields={
                 'language': 'english',
-                'title': 'Predicting the Diffusion Coefficient in Supercritical Fluids',
+                'title': 'Predicting the Diffusion Coefficient'
+                         ' in Supercritical Fluids',
                 'journal': 'Ind. Eng. Chem. Res.',
                 'volume': '36',
                 'year': '1997',

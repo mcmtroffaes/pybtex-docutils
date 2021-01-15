@@ -4,6 +4,8 @@ include INSTALL.rst
 include CHANGELOG.rst
 include LICENSE.rst
 include requirements.txt
+include mypy.ini
+include pytest.ini
 recursive-include doc *
 recursive-include test *
 global-exclude *.pyc
