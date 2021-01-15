@@ -3,8 +3,7 @@ API
 ~~~
 
 The backend renders :class:`pybtex.richtext.Text` instances
-into a list of :class:`docutils.nodes.Text`
-and :class:`docutils.nodes.inline` instances (or subclasses of these).
+into a list of :class:`docutils.nodes.Node` instances.
 For typical use cases, all you need to care about are the methods
 :meth:`Backend.paragraph`,
 :meth:`Backend.citation`, and
@@ -12,9 +11,9 @@ For typical use cases, all you need to care about are the methods
 which are to be called on *formatted* entries,
 as in the :ref:`minimal example <minimal-example>`.
 
-Note that you should not import the :mod:`pybtex_docutils` module directly.
+Unless you are subclassing :class:`Backend` to create a new backend,
+you should normally not import the :mod:`pybtex_docutils` module directly.
 Instead, use pybtex's plugin system to get the :class:`Backend` class,
-again,
 as in the :ref:`minimal example <minimal-example>`.
 
 .. autoclass:: Backend
