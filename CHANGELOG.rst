@@ -1,7 +1,11 @@
-1.0.0 (in development)
-----------------------
+1.0.0 (15 January 2021)
+-----------------------
 
 * Drop Python 2.7, 3.4, and 3.5 support.
+
+* Add type annotations.
+
+* Add support for sub and sup tags.
 
 0.2.2 (9 October 2019)
 ----------------------
