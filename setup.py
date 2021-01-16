@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import codecs
 
 
@@ -21,7 +21,7 @@ setup(
     author_email='matthias.troffaes@gmail.com',
     description=doclines[0],
     long_description="\n".join(doclines[2:]),
-    zip_safe=True,
+    zip_safe=False,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
@@ -38,7 +38,7 @@ setup(
         'Topic :: Text Processing :: Markup :: XML'
     ],
     platforms='any',
-    py_modules=['pybtex_docutils'],
+    packages=find_packages(),
     install_requires=requires,
     entry_points={
         'pybtex.backends': [
