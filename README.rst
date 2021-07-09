@@ -4,11 +4,11 @@ A docutils backend for pybtex.
 
 * Documentation: https://pybtex-docutils.readthedocs.io/
 
-* Development: http://github.com/mcmtroffaes/pybtex-docutils/ |imagetravis| |imagecodecov|
+* Development: http://github.com/mcmtroffaes/pybtex-docutils/ |imagegithub| |imagecodecov|
 
-.. |imagetravis| image:: https://travis-ci.com/mcmtroffaes/pybtex-docutils.png?branch=develop
-       :target: https://travis-ci.org/mcmtroffaes/pybtex-docutils
-       :alt: travis-ci
+.. |imagegithub| image:: https://github.com/mcmtroffaes/pybtex-docutils/actions/workflows/python-package.yml/badge.svg
+       :target: https://github.com/mcmtroffaes/pybtex-docutils/actions/workflows/python-package.yml
+       :alt: github-ci
 
 .. |imagecodecov| image:: https://codecov.io/gh/mcmtroffaes/pybtex-docutils/branch/develop/graph/badge.svg
        :target: https://codecov.io/gh/mcmtroffaes/pybtex-docutils
