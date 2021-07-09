@@ -34,11 +34,13 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Text Editors :: Text Processing',
         'Topic :: Text Processing :: Markup :: XML'
     ],
     platforms='any',
-    packages=find_packages(),
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
     install_requires=requires,
     entry_points={
         'pybtex.backends': [
