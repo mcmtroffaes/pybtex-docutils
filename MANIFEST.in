@@ -11,4 +11,3 @@ recursive-include test *
 global-exclude *.pyc
 global-exclude .gitignore
 prune doc/_build
-include src/pybtex_docutils/py.typed

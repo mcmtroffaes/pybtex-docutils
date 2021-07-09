@@ -39,8 +39,9 @@ setup(
         'Topic :: Text Processing :: Markup :: XML'
     ],
     platforms='any',
-    packages=find_packages('src'),
+    packages=['pybtex_docutils'],
     package_dir={'': 'src'},
+    package_data={'pybtex_docutils': ['py.typed']},
     install_requires=requires,
     entry_points={
         'pybtex.backends': [
