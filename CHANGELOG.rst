@@ -1,6 +1,10 @@
 1.0.1 (in development)
 ----------------------
 
+* Add py.typed so mypy finds the type annotations.
+
+* Switch to github actions for regression testing.
+
 1.0.0 (15 January 2021)
 -----------------------
 
