@@ -7,7 +7,7 @@ def readfile(filename):
         return stream.read().split("\n")
 
 
-doclines = readfile("README.rst")
+doclines = readfile("README.rst")[5:]  # skip badges
 requires = readfile("requirements.txt")
 version = readfile("VERSION")[0].strip()
 
