@@ -1,5 +1,8 @@
-1.0.1 (in development)
+1.0.2 (in development)
 ----------------------
+
+1.0.1 (29 July 2021)
+--------------------
 
 * Add py.typed so mypy finds the type annotations.
 
