@@ -29,7 +29,8 @@ as in the :ref:`minimal example <minimal-example>`.
 import docutils.nodes
 import itertools
 
-from docutils.parsers.rst import Directive, directives
+import docutils.parsers.rst.directives as directives
+from docutils.parsers.rst import Directive
 from pybtex.backends import BaseBackend
 import pybtex.database
 import pybtex.plugin

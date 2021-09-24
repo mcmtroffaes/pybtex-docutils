@@ -1,7 +1,7 @@
 import os.path
 import re
 from docutils.core import publish_file
-from docutils.parsers.rst import directives
+import docutils.parsers.rst.directives as directives
 
 from pybtex_docutils import SimpleBibliography
 
