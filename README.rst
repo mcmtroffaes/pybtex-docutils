@@ -71,7 +71,7 @@ where ``refs.bib`` might contain:
 Note that citation keys are used as labels. For this to work, it is thus
 necessary that all keys in your bib file are valid citation labels for
 docutils. In particular, they cannot contain colons.
-This limitation is lifted in the ``sphinxcontrib-bibtex``,
+This limitation is lifted in ``sphinxcontrib-bibtex``,
 which also provides many more citation features.
 
 To use the directive, you have to write your own driver command
