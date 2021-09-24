@@ -68,8 +68,8 @@ class Backend(BaseBackend):
         else:
             return text
 
-    def format_href(self, url: str, text: List[docutils.nodes.Node]
-                    ) -> List[docutils.nodes.Node]:
+    def format_href(self, url: str, text: List[docutils.nodes.Node],
+                    external: bool=False) -> List[docutils.nodes.Node]:
         node = docutils.nodes.reference('', '', *text, refuri=url)
         return [node]
 
