@@ -6,7 +6,7 @@ from docutils.parsers.rst import directives
 from pybtex_docutils import SimpleBibliography
 
 
-def html_citation_reference(key):
+def html_citation_ref(key):
     return re.compile(
         fr'<a class="citation-reference" '
         fr'href="#{key.lower()}" id="\w+">'
@@ -26,7 +26,7 @@ def html_citation(key):
         fr'<a href="#\w+">1</a>'
         fr',<a href="#\w+">2</a>'
         fr'(,<a href="#\w+">3</a>)?'
-        fr'(,<a href="#\w+">\d+</a>)*'  # no named group for additional backrefs
+        fr'(,<a href="#\w+">\d+</a>)*'
         fr'\)</span>)?'
         fr'</dt>\n')
 
@@ -37,9 +37,9 @@ def test_simplebibliography():
         os.path.dirname(__file__),
         "roots", "test_simplebibliography", "index.rst")
     result = publish_file(source_path=source_path, writer_name="html5")
-    assert re.search(html_citation_reference('Mandel2009'), result) is not None
-    assert re.search(html_citation_reference('Evensen2003'), result) is not None
-    assert re.search(html_citation_reference('Lorenc1986'), result) is None
+    assert re.search(html_citation_ref('Mandel2009'), result) is not None
+    assert re.search(html_citation_ref('Evensen2003'), result) is not None
+    assert re.search(html_citation_ref('Lorenc1986'), result) is None
     assert re.search(html_citation('Mandel2009'), result) is not None
     assert re.search(html_citation('Evensen2003'), result) is not None
     assert re.search(html_citation('Lorenc1986'), result) is not None
