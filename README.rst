@@ -25,7 +25,7 @@ A docutils backend for pybtex.
 Installation
 ------------
 
-For use with sphinx, simply install
+For use with Sphinx, simply install
 `sphinxcontrib-bibtex <https://sphinxcontrib-bibtex.readthedocs.io/>`_.
 
 For use with pure docutils,
@@ -35,7 +35,7 @@ source using ``pip install -e .``.
 Minimal Example
 ---------------
 
-For use with sphinx, refer to the
+For use with Sphinx, refer to the
 `sphinxcontrib-bibtex <https://sphinxcontrib-bibtex.readthedocs.io/>`_
 documentation.
 
