@@ -26,7 +26,7 @@ Installation
 ------------
 
 For use with sphinx, simply install
-`sphinxcontrib-bibtex <https://sphinxcontrib-bibtex.readthedocs.io/>`_
+`sphinxcontrib-bibtex <https://sphinxcontrib-bibtex.readthedocs.io/>`_.
 
 For use with pure docutils,
 install the module with ``pip install pybtex_docutils``, or from
@@ -35,19 +35,27 @@ source using ``pip install -e .``.
 Minimal Example
 ---------------
 
-For sphinx, refer to the
+For use with sphinx, refer to the
 `sphinxcontrib-bibtex <https://sphinxcontrib-bibtex.readthedocs.io/>`_
 documentation.
 
 For use with pure docutils, the module exposes a new ``simplebibliography``
 directive, which will generate a citation for every entry in the specified
-bib files. For example:
+bib files.
+This new directive is only intended
+for simple single document workflows
+that do not require the full power of Sphinx.
+You need exactly one of these directives in your document,
+placed at the location where you want the citations to appear
+(typically, at the end).
+
+For example:
 
 .. code-block:: rest
 
    See  [Nelson1987]_ for an introduction to non-standard analysis.
 
-   .. bibliography:: refs.bib
+   .. simplebibliography:: refs.bib
 
 where ``refs.bib`` might contain:
 
@@ -63,6 +71,8 @@ where ``refs.bib`` might contain:
 Note that citation keys are used as labels. For this to work, it is thus
 necessary that all keys in your bib file are valid citation labels for
 docutils. In particular, they cannot contain colons.
+This limitation is lifted in the ``sphinxcontrib-bibtex``,
+which also provides many more citation features.
 
 To use the directive, you have to write your own driver command
 (there seems to be no other way currently to extend docutils). For instance:
