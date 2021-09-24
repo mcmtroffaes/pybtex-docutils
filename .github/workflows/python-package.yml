@@ -17,7 +17,7 @@ jobs:
         pip-pybtex: [pybtex]
         include:
           - python-version: 3.9
-            pip-pybtex: ["git+https://bitbucket.org/pybtex-devs/pybtex.git"]
+            pip-pybtex: "git+https://bitbucket.org/pybtex-devs/pybtex.git"
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
