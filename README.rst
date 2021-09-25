@@ -74,7 +74,7 @@ docutils. In particular, they cannot contain colons.
 This limitation is lifted in ``sphinxcontrib-bibtex``,
 which also provides many more citation features.
 
-To use the directive, you have to write your own driver command
+To use the directive, you have to write your own command script
 (there seems to be no other way currently to extend docutils). For instance:
 
 .. code-block:: python
