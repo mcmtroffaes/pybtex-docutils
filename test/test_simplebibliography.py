@@ -33,7 +33,7 @@ def html_citation(key):
 def test_simplebibliography(test_roots):
     directives.register_directive("bibliography", SimpleBibliography)
     source_path = test_roots / "test_simplebibliography" / "index.rst"
-    result = publish_file(source_path=source_path, writer_name="html5")
+    result = publish_file(source_path=str(source_path), writer_name="html5")
     assert re.search(html_citation_ref('Mandel2009'), result) is not None
     assert re.search(html_citation_ref('Evensen2003'), result) is not None
     assert re.search(html_citation_ref('Lorenc1986'), result) is None
