@@ -1,5 +1,5 @@
-1.0.2 (in development)
-----------------------
+1.0.2 (25 May 2022)
+-------------------
 
 * New ``simplebibliography``
   directive, which will generate a citation for every entry in the specified
