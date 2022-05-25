@@ -1,6 +1,14 @@
 1.0.2 (in development)
 ----------------------
 
+* New ``simplebibliography``
+  directive, which will generate a citation for every entry in the specified
+  bib files, intended for simple single document workflows that do not require
+  the full power of Sphinx.
+
+* Fix deprecation warning with docutils 0.18 (see issue #21, reported by
+  drammock).
+
 1.0.1 (29 July 2021)
 --------------------
 

@@ -128,7 +128,8 @@ def test_citation(entry, document):
 def test_citation_reference(entry, document):
     node = Backend().citation_reference(entry, document)
     assert str(node) == (
-        '<citation_reference ids="id1" refname="hongquin1997">'
+        '<citation_reference ids="citation-reference-1" '
+        'refname="hongquin1997">'
         'hongquin1997'
         '</citation_reference>')
 
@@ -152,7 +153,8 @@ def test_citation_reference_use_label(entry, document):
     node = Backend().citation_reference(
         entry, document, use_key_as_label=False)
     assert str(node) == (
-        '<citation_reference ids="id1" refname="hongquin1997">'
+        '<citation_reference ids="citation-reference-1" '
+        'refname="hongquin1997">'
         '1'
         '</citation_reference>')
 
@@ -173,7 +175,7 @@ def test_footnote(entry, document):
 def test_footnote_reference(entry, document):
     node = Backend().footnote_reference(entry, document)
     assert str(node) == (
-        '<footnote_reference auto="1" ids="[\'id1\']" '
+        '<footnote_reference auto="1" ids="[\'footnote-reference-1\']" '
         'refname="hongquin1997"/>')
 
 
