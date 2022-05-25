@@ -1,13 +1,13 @@
 from setuptools import setup
-import codecs
+import io
 
 
 def readfile(filename):
-    with codecs.open(filename, encoding="utf-8") as stream:
+    with io.open(filename, encoding="utf-8") as stream:
         return stream.read().split("\n")
 
 
-doclines = readfile("README.rst")[5:]  # skip badges
+doclines = readfile("README.rst")[5:]  # skip title and badges
 requires = readfile("requirements.txt")
 version = readfile("VERSION")[0].strip()
 
