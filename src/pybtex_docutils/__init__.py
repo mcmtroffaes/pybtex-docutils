@@ -47,9 +47,9 @@ class Backend(BaseBackend):
     name = 'docutils'
 
     symbols = {
-        'ndash': [docutils.nodes.Text('\u2013', '\u2013')],
-        'newblock': [docutils.nodes.Text(' ', ' ')],
-        'nbsp': [docutils.nodes.Text('\u00a0', '\u00a0')],
+        'ndash': [docutils.nodes.Text('\u2013')],
+        'newblock': [docutils.nodes.Text(' ')],
+        'nbsp': [docutils.nodes.Text('\u00a0')],
     }
     tags = {
         'emph': docutils.nodes.emphasis,  # note: deprecated
@@ -69,7 +69,7 @@ class Backend(BaseBackend):
         return self.format_str(text)
 
     def format_str(self, str_: str) -> List[docutils.nodes.Node]:
-        return [docutils.nodes.Text(str_, str_)]
+        return [docutils.nodes.Text(str_)]
 
     def format_tag(self, tag_name: str, text: List[docutils.nodes.Node]
                    ) -> List[docutils.nodes.Node]:
