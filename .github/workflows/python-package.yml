@@ -16,7 +16,7 @@ jobs:
         python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11-dev']
         pip-pybtex: [pybtex]
         include:
-          - python-version: 3.10
+          - python-version: '3.10'
             pip-pybtex: "git+https://bitbucket.org/pybtex-devs/pybtex.git"
     steps:
     - uses: actions/checkout@v2
