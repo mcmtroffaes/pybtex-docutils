@@ -1,6 +1,13 @@
 1.0.3 (in development)
 ----------------------
 
+* Bump required docutils version to 0.14.
+
+* Add tests for docutils 0.14 and 0.18 in github workflow.
+
+* Fix tests for docutils 0.17 and lower (fixes issue #22, reported by
+  kloczek).
+
 1.0.2 (25 May 2022)
 -------------------
 

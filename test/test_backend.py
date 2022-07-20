@@ -1,3 +1,4 @@
+import docutils
 import docutils.nodes
 import docutils.utils
 import pytest
@@ -127,11 +128,15 @@ def test_citation(entry, document):
 
 def test_citation_reference(entry, document):
     node = Backend().citation_reference(entry, document)
+    id_ = (
+        "id1" if docutils.__version_info__ < (0, 18) else
+        "citation-reference-1"
+    )
     assert str(node) == (
-        '<citation_reference ids="citation-reference-1" '
-        'refname="hongquin1997">'
-        'hongquin1997'
-        '</citation_reference>')
+        f'<citation_reference ids="{id_}" '
+        f'refname="hongquin1997">'
+        f'hongquin1997'
+        f'</citation_reference>')
 
 
 def test_citation_use_label(entry, document):
@@ -152,11 +157,15 @@ def test_citation_use_label(entry, document):
 def test_citation_reference_use_label(entry, document):
     node = Backend().citation_reference(
         entry, document, use_key_as_label=False)
+    id_ = (
+        "id1" if docutils.__version_info__ < (0, 18) else
+        "citation-reference-1"
+    )
     assert str(node) == (
-        '<citation_reference ids="citation-reference-1" '
-        'refname="hongquin1997">'
-        '1'
-        '</citation_reference>')
+        f'<citation_reference ids="{id_}" '
+        f'refname="hongquin1997">'
+        f'1'
+        f'</citation_reference>')
 
 
 def test_footnote(entry, document):
@@ -174,9 +183,13 @@ def test_footnote(entry, document):
 
 def test_footnote_reference(entry, document):
     node = Backend().footnote_reference(entry, document)
+    id_ = (
+        "id1" if docutils.__version_info__ < (0, 18) else
+        "footnote-reference-1"
+    )
     assert str(node) == (
-        '<footnote_reference auto="1" ids="[\'footnote-reference-1\']" '
-        'refname="hongquin1997"/>')
+        f'<footnote_reference auto="1" ids="[\'{id_}\']" '
+        f'refname="hongquin1997"/>')
 
 
 def test_write_entry():
