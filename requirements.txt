@@ -1,2 +1,2 @@
-docutils>=0.8
+docutils>=0.14
 pybtex>=0.16
