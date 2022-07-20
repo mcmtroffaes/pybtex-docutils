@@ -14,12 +14,18 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11-dev']
-        docutils-version: ['==0.14', '==0.18', '']
-        pip-pybtex: [pybtex]
+        docutils-version: ['']
+        pip-pybtex: ['pybtex']
         include:
           - python-version: '3.10'
             docutils-version: ''
-            pip-pybtex: "git+https://bitbucket.org/pybtex-devs/pybtex.git"
+            pip-pybtex: 'git+https://bitbucket.org/pybtex-devs/pybtex.git'
+          - python-version: '3.7'
+            docutils-version: '==0.14'
+            pip-pybtex: 'pybtex'
+          - python-version: '3.10'
+            docutils-version: '==0.18'
+            pip-pybtex: 'pybtex'
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
