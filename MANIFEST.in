@@ -1,6 +1,5 @@
 include VERSION
 include README.rst
-include INSTALL.rst
 include CHANGELOG.rst
 include LICENSE.rst
 include requirements.txt

@@ -8,13 +8,11 @@ For typical use cases, all you need to care about are the methods
 :meth:`Backend.paragraph`,
 :meth:`Backend.citation`, and
 :meth:`Backend.citation_reference`
-which are to be called on *formatted* entries,
-as in the :ref:`minimal example <minimal-example>`.
+which are to be called on *formatted* entries.
 
 Unless you are subclassing :class:`Backend` to create a new backend,
 you should normally not import the :mod:`pybtex_docutils` module directly.
-Instead, use pybtex's plugin system to get the :class:`Backend` class,
-as in the :ref:`minimal example <minimal-example>`.
+Instead, use pybtex's plugin system to get the :class:`Backend` class.
 
 .. autoclass:: Backend
    :show-inheritance:

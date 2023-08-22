@@ -97,3 +97,35 @@ To use the directive, you have to write your own command script
        publish_cmdline(writer_name='html5', description=description)
 
 You can then run this command as if you would run ``rst2html5``.
+
+You can also use the library to generate docutils nodes directly. For instance:
+
+.. code-block:: python
+
+    import io
+    import pybtex.database.input.bibtex
+    import pybtex.plugin
+
+    style = pybtex.plugin.find_plugin('pybtex.style.formatting', 'plain')()
+    backend = pybtex.plugin.find_plugin('pybtex.backends', 'docutils')()
+    parser = pybtex.database.input.bibtex.Parser()
+    data = parser.parse_stream(io.StringIO(u"""
+    @Book{1985:lindley,
+      author =    {D. Lindley},
+      title =     {Making Decisions},
+      publisher = {Wiley},
+      year =      {1985},
+      edition =   {2nd},
+    }
+    """))
+    for entry in style.format_entries(data.entries.values()):
+        print(backend.paragraph(entry))
+
+would produce:
+
+.. code-block:: xml
+
+   <paragraph>
+     D. Lindley. <emphasis>Making Decisions</emphasis>.
+     Wiley, 2nd edition, 1985.
+   </paragraph>
