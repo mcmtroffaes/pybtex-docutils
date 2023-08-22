@@ -1,4 +1,4 @@
-1.0.3 (in development)
+1.0.3 (22 August 2023)
 ----------------------
 
 * Bump required docutils version to 0.14.
@@ -7,6 +7,8 @@
 
 * Fix tests for docutils 0.17 and lower (fixes issue #22, reported by
   kloczek).
+
+* Drop Python 3.6 support.
 
 1.0.2 (25 May 2022)
 -------------------
