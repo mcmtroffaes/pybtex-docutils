@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11-dev']
+        python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11']
         docutils-version: ['']
         pip-pybtex: ['pybtex']
         include:
@@ -27,9 +27,9 @@ jobs:
             docutils-version: '==0.18'
             pip-pybtex: 'pybtex'
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
