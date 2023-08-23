@@ -2,7 +2,7 @@ name: release
 on:
   push:
 jobs:
-  build-and-publish:
+  release:
     if: github.repository == 'mcmtroffaes/pybtex-docutils'
     runs-on: ubuntu-latest
     steps:
