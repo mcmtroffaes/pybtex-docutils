@@ -22,6 +22,7 @@ setup(
     author_email="matthias.troffaes@gmail.com",
     description=doclines[0],
     long_description="\n".join(doclines[2:]),
+    long_description_content_type="text/x-rst",
     zip_safe=False,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
